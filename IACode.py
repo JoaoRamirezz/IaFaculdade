@@ -21,42 +21,62 @@ doces = {'bolo de cenoura' : boloCenoura , 'bolo de morango' : boloMorango,
          }
 
 
-
-def VerificarSobremesa(Lista):
-
-    global doces
-    docespossiveis = []
+def AddReceitas(NomeReceita, Receita, Receitas):
+    Receitas[NomeReceita] = Receita
     
-    for ig in Lista:
-        for doce in doces:
-            for ig2 in doces[doce]:
-                if ig != ig2:
-                    print(ig + '/' + ig2 + 'DIFERENTE')
-                    break
-            docespossiveis.append(doces)
+    return Receitas
+    
+def VerificarSobremesa(ingredientes: list, Receitas) -> list:
+
+    possiveis = []
+    
+    for nome in Receitas:
+        receita = Receitas[nome]
+        flag = True
         
+        for ingrediente in ingredientes:
+            if (not (ingrediente.strip().lower() in receita)):
+                flag = False
+                break
+            
+        if (flag):
+            possiveis.append(nome)
+    
+    return possiveis
+            
                 
     
-    
-    # for ingrediente in Lista:
-    #     for doce in doces:
-    #         for ingredienteDoce in doce:
-    #             if ingrediente == ingredienteDoce:
-    #                 docespossiveis.append(doce[-1])
-                    
+def Iniciar(doces):
+    doces = AddReceitas("NomeReceita", ["Receita"], doces)
     
     
-    print(docespossiveis)
-                
+    escolha = int(input('O que deseja fazer?\n1) Adicionar uma receita no livro de receitas. \n2) Verificar uma receita. \nR: '))
     
     
+    if escolha == 1:
+        Receita = []
+        NomeReceita = input('Insira o nome da receita: ')
+        
+        Qtt = int(input('Quantos igredientes possui sua receita? '))
+        
+        for i in range(Qtt):
+            igrediente = input(f'Igrediente numero {i+1}: ')
+            Receita.append(igrediente)
+        
+        AddReceitas(NomeReceita, Receita, doces)
+        
+        
+        
+    elif escolha == 2:
+        lista = []
+        numeroingredientes = int(input("Você deseja utilizar quantos ingredients?\nR: "))
+        
+        for i in range(numeroingredientes):
+            ig = input(f"Ingrediente numero {i+1}: ")
+            lista.append(ig)
+        
+        print(VerificarSobremesa(lista))
     
-lista = []
 
-numeroingredientes = int(input("Você deseja utilizar quantos ingredients?\nR: "))
 
-for i in range(numeroingredientes):
-    ig = input(f"Ingrediente numero {i+1}: ")
-    lista.append(ig)
-    
-VerificarSobremesa(lista)
+Iniciar(doces)
