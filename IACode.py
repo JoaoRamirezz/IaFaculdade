@@ -20,6 +20,9 @@ doces = {'bolo de cenoura' : boloCenoura , 'bolo de morango' : boloMorango,
          'brigadeiro' : brigadeiro, 'beijinho' : beijinho
          }
 
+salgados = {
+    }
+
 
 def AddReceitas(NomeReceita, Receita, Receitas):
     Receitas[NomeReceita] = Receita
@@ -54,29 +57,55 @@ def Iniciar(doces):
     
     
     if escolha == 1:
+        
+        tipo = int(input("Qual o tipo da sua receita?zn1) Salgado 2)Doce\nR: "))
+        
+ 
         Receita = []
         NomeReceita = input('Insira o nome da receita: ')
         
-        Qtt = int(input('Quantos igredientes possui sua receita? '))
+        while True:
+            igrediente = input('Insira um igrediente: ')
+            
+            if igrediente == '':
+                break
+            else:
+            
+                Receita.append(igrediente)
         
-        for i in range(Qtt):
-            igrediente = input(f'Igrediente numero {i+1}: ')
-            Receita.append(igrediente)
-        
-        AddReceitas(NomeReceita, Receita, doces)
+        if tipo == 1:
+            AddReceitas(NomeReceita, Receita, doces)
+        elif tipo == 2:
+            AddReceitas(NomeReceita, Receita, salgados)
         
         
         
     elif escolha == 2:
         lista = []
-        numeroingredientes = int(input("Você deseja utilizar quantos ingredients?\nR: "))
         
-        for i in range(numeroingredientes):
-            ig = input(f"Ingrediente numero {i+1}: ")
-            lista.append(ig)
+        tipo = int(input("Qual o tipo da sua receita?zn1) Salgado 2)Doce\nR: "))
         
-        print(VerificarSobremesa(lista))
+        while True:
+            ig = input("Insira um igrediente: ")
+            
+            if ig == '':
+                break
+            else: 
+                lista.append(ig)
+        
+        if tipo == 1:
+            print('\nPossiveis receitas: ',VerificarSobremesa(lista, salgados))
+        elif tipo == 2:
+            print('\nPossiveis receitas: ',VerificarSobremesa(lista, doces))
     
 
-
-Iniciar(doces)
+while True:
+    escolha = int(input('Deseja realizar uma ação?\n1) Sim\n2) Não\nR: '))
+    
+    if escolha == 1:
+        Iniciar(doces)
+    elif escolha == 2:
+        print("Obrigado por utilizar nosso algoritmo!")
+        break
+    else:
+        print("Escolha uma opção valida!")
