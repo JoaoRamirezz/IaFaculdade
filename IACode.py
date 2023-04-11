@@ -33,16 +33,16 @@ def VerificarSobremesa(ingredientes: list, Receitas) -> list:
 
     possiveis = []
     
+    
     for nome in Receitas:
         receita = Receitas[nome]
-        flag = True
         
         for ingrediente in ingredientes:
-            if (not (ingrediente.strip().lower() in receita)):
-                flag = False
-                break
-            
-        if (flag):
+            ig = ingrediente.strip().lower()
+            if ( ig in receita):
+                receita.remove(ig)
+                
+        if len(receita) == 0:
             possiveis.append(nome)
     
     return possiveis
@@ -50,7 +50,6 @@ def VerificarSobremesa(ingredientes: list, Receitas) -> list:
                 
     
 def Iniciar(doces):
-    doces = AddReceitas("NomeReceita", ["Receita"], doces)
     
     
     escolha = int(input('O que deseja fazer?\n1) Adicionar uma receita no livro de receitas. \n2) Verificar uma receita. \nR: '))
@@ -58,7 +57,7 @@ def Iniciar(doces):
     
     if escolha == 1:
         
-        tipo = int(input("Qual o tipo da sua receita?zn1) Salgado 2)Doce\nR: "))
+        tipo = int(input("Qual o tipo da sua receita?\n1) Salgado \n2) Doce\nR: "))
         
  
         Receita = []
@@ -70,28 +69,31 @@ def Iniciar(doces):
             if igrediente == '':
                 break
             else:
-            
                 Receita.append(igrediente)
+                
         
         if tipo == 1:
-            AddReceitas(NomeReceita, Receita, doces)
-        elif tipo == 2:
             AddReceitas(NomeReceita, Receita, salgados)
+        elif tipo == 2:
+            AddReceitas(NomeReceita, Receita, doces)
+        
+        
         
         
         
     elif escolha == 2:
         lista = []
         
-        tipo = int(input("Qual o tipo da sua receita?zn1) Salgado 2)Doce\nR: "))
+        tipo = int(input("Qual o tipo da sua receita?\n1) Salgado \n2) Doce\nR: "))
         
         while True:
             ig = input("Insira um igrediente: ")
-            
             if ig == '':
                 break
             else: 
                 lista.append(ig)
+        
+        
         
         if tipo == 1:
             print('\nPossiveis receitas: ',VerificarSobremesa(lista, salgados))
