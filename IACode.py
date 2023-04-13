@@ -29,13 +29,12 @@ def AddReceitas(NomeReceita, Receita, Receitas):
     
     return Receitas
     
-def VerificarSobremesa(ingredientes: list, Receitas) -> list:
-
+def VerificarSobremesa(ingredientes, Receitas):
     possiveis = []
     
-    
+    print(Receitas)
     for nome in Receitas:
-        receita = Receitas[nome]
+        receita = Receitas[nome].copy()
         
         for ingrediente in ingredientes:
             ig = ingrediente.strip().lower()
@@ -44,12 +43,13 @@ def VerificarSobremesa(ingredientes: list, Receitas) -> list:
                 
         if len(receita) == 0:
             possiveis.append(nome)
+            print(f"adicionei: {nome} - {ingredientes}")
     
     return possiveis
             
                 
     
-def Iniciar(doces):
+def Iniciar():
     
     
     escolha = int(input('O que deseja fazer?\n1) Adicionar uma receita no livro de receitas. \n2) Verificar uma receita. \nR: '))
@@ -97,17 +97,20 @@ def Iniciar(doces):
         
         if tipo == 1:
             print('\nPossiveis receitas: ',VerificarSobremesa(lista, salgados))
+            print(lista)
         elif tipo == 2:
             print('\nPossiveis receitas: ',VerificarSobremesa(lista, doces))
+            print(lista)
     
 
 while True:
     escolha = int(input('Deseja realizar uma ação?\n1) Sim\n2) Não\nR: '))
     
     if escolha == 1:
-        Iniciar(doces)
+        Iniciar()
     elif escolha == 2:
         print("Obrigado por utilizar nosso algoritmo!")
+        
         break
     else:
         print("Escolha uma opção valida!")
