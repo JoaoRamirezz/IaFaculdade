@@ -3,14 +3,26 @@ boloMorango = ['farinha','trigo','ovo','morango','fermento']
 boloChocolate = ['farinha','trigo','ovo','chocolate','fermento']
 boloMaracuja = ['farinha','trigo','ovo','maracuja','fermento']
 
+
+
+
 pudimDeLeite = ['leite condensado','leite','ovo']
-pudimDePao = ['leite condensado','leite','ovo']
+pudimDePao = ['leite condensado','leite','pão']
+
+
+
 
 TortaLimao = ['maizena','leite condensado','limão','glace']
 TortaBanana = ['maizena','leite condensado','banana','glace']
 
+
+
+
 brigadeiro = ['chocolate','leite condensado','manteiga']
 beijinho = ['baunilha','leite condensado','manteiga','coco']
+
+
+
 
 
 doces = {'bolo de cenoura' : boloCenoura , 'bolo de morango' : boloMorango, 
@@ -29,10 +41,9 @@ def AddReceitas(NomeReceita, Receita, Receitas):
     
     return Receitas
     
-def VerificarSobremesa(ingredientes, Receitas):
+def VerificareReceita(ingredientes, Receitas):
     possiveis = []
     
-    print(Receitas)
     for nome in Receitas:
         receita = Receitas[nome].copy()
         
@@ -96,12 +107,10 @@ def Iniciar():
         
         
         if tipo == 1:
-            print('\nPossiveis receitas: ',VerificarSobremesa(lista, salgados))
-            print(lista)
+            print('\nPossiveis receitas: ',VerificareReceita(lista, salgados))
         elif tipo == 2:
-            print('\nPossiveis receitas: ',VerificarSobremesa(lista, doces))
-            print(lista)
-    
+            print('\nPossiveis receitas: ',VerificareReceita(lista, doces))
+
 
 while True:
     escolha = int(input('Deseja realizar uma ação?\n1) Sim\n2) Não\nR: '))
